@@ -100,6 +100,49 @@ API REST para controle de estoque, desenvolvida como teste para C&A.
 - **Mensagens de erro:**  
   Caso a validação falhe, a API retorna um JSON com o motivo do erro e o campo correspondente.
 
+---
+
+## Como foi feito
+
+A API foi desenvolvida utilizando as melhores práticas do ecossistema Spring Boot, buscando clareza, organização e facilidade de manutenção e evolução. O projeto segue uma arquitetura tradicional para aplicações REST em Java, com os seguintes destaques:
+
+### Estrutura do Projeto
+
+- **Baseada em camadas:**  
+  O código é organizado separando responsabilidades em camadas distintas:
+  - **Controller:** Responsável por expor os endpoints REST, receber e validar as requisições.
+  - **Service:** Realiza a lógica de negócio, orquestrando as operações e aplicando regras específicas como validações de preço e quantidade.
+  - **Repository:** Camada de acesso ao banco de dados, utilizando Spring Data JPA para facilitar operações CRUD sem necessidade de SQL manual.
+  - **Model/Entity:** Define as entidades persistidas, representando os produtos do estoque.
+
+- **DTOs (Data Transfer Objects):**  
+  Utilizados para trafegar dados entre as camadas e para garantir que apenas as informações necessárias sejam expostas nas respostas e aceitas nas requisições.
+
+### Principais Funcionalidades Técnicas
+
+- **Validação automática:**  
+  Utilização das anotações do Bean Validation (javax.validation), como `@DecimalMin`, para garantir que as regras de negócio (ex: preço mínimo) sejam verificadas antes do processamento. Erros de validação geram respostas claras e amigáveis ao usuário.
+
+- **Auditoria de alterações:**  
+  Toda vez que um produto é atualizado (preço ou quantidade), a data da última alteração é registrada automaticamente na entidade. Isso permite o rastreamento histórico de modificações, importante para controle de estoque.
+
+- **Documentação automática:**  
+  A API gera sua própria documentação interativa utilizando Swagger (OpenAPI), facilitando testes, integração e entendimento dos contratos disponíveis.
+
+- **Banco H2 em memória:**  
+  Escolhido para simplificar a execução e os testes locais, eliminando a necessidade de configuração extra de banco. O banco é resetado a cada reinício da aplicação.
+
+### Boas Práticas e Decisões Adotadas
+
+- **Separaçao de responsabilidades:**  
+  Cada camada tem seu papel bem definido, facilitando manutenção e testabilidade.
+- **Mensagens de erro claras:**  
+  Respostas de erro detalham quais campos estão inválidos e o motivo, ajudando o usuário final.
+- **Facilidade para testes:**  
+  Toda a API pode ser testada via Postman, Insomnia ou diretamente pela interface Swagger UI.
+
+---
+
 ## Observações
 
 - O projeto está pronto para testes rápidos via Postman, Insomnia ou Swagger UI.
