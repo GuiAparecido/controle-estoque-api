@@ -20,6 +20,9 @@ API REST para controle de estoque, desenvolvida como teste para C&A.
   ```
   Isso garante que qualquer requisição para cadastrar ou atualizar o preço de um produto que não atenda a essa regra será rejeitada com erro 400 e mensagem explicativa.
 
+- **Armazenamento da data de alteração:**  
+  Toda vez que um produto é alterado (preço ou quantidade), a data da última modificação é registrada automaticamente no banco de dados. Isso permite rastrear quando cada produto foi modificado pela última vez.
+
 ## Como rodar a aplicação
 
 1. **Clone o repositório**
@@ -101,6 +104,7 @@ API REST para controle de estoque, desenvolvida como teste para C&A.
 
 - O projeto está pronto para testes rápidos via Postman, Insomnia ou Swagger UI.
 - O banco de dados é resetado sempre que a aplicação é reiniciada (por ser H2 em memória).
+- **Data de alteração dos produtos:** Sempre que um produto é atualizado, a data da última alteração é salva e pode ser consultada.
 
 ---
 Desenvolvido por [GuiAparecido](https://github.com/GuiAparecido)
