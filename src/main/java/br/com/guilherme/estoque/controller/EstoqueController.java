@@ -20,17 +20,13 @@ public class EstoqueController {
     @Autowired
     private EstoqueService estoqueService;
 
-    @GetMapping("/olaMundo")
-    public String olaMundo(){
-        return "Olá Mundo";
-    }
-
     @PostMapping
     public ResponseEntity cadastrarProduto(@Valid @RequestBody CadastroEstoqueDTO cadastroEstoqueDTO){
         estoqueService.cadastrarProduto(cadastroEstoqueDTO);
         return ResponseEntity.created(URI.create("/estoque")).build();
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping
     public ResponseEntity<List <RetornoEstoqueDTO>> listarProduto(){
         return ResponseEntity.ok( estoqueService.listarProduto());
